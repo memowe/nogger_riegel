@@ -19,8 +19,6 @@ get '/search' => sub {
     }
 };
 
-# TODO auf leere Eingabe
-
 get '/:plz' => [ plz => qr/\d{5}/ ] => 'plz';
 
 get '/error' => 'error';
@@ -67,6 +65,10 @@ Hüfferstraße 27<br>
 <%== content %>
 </div>
 </div>
-<address><a href="http://twitter.com/nogger_riegel">@nogger_riegel</a></address>
+<address>
+    <a href="http://twitter.com/nogger_riegel"><img src="twitter_32.png" alt="twitter" width="32" height="32"></a>
+    <a href="http://u.nu/6i2g8"><img src="facebook_32.png" alt="facebook" width="32" height="32"></a>
+    <a href="http://flickr.com/groups/nogger_riegel/"><img src="flickr_32.png" alt="flickr" width="32" height="32"></a>
+</address>
 </body>
 </html>
