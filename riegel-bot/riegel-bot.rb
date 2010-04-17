@@ -5,6 +5,8 @@ require 'pp'
 u = ENV['RIEGEL_USER']
 p = ENV['RIEGEL_PASS']
 
+last = 42
+
 class Array
   def random
     self[rand(size)]
@@ -25,12 +27,13 @@ end
 
 client = Grackle::Client.new :auth => { :type => :basic, :username => u, :password => p }
 TweetStream::Daemon.new(u,p,'riegel-bot').track('eis') do |status|
-  if status.text =~ /eis.*esse|esse.*eis/i
+  if status.text =~ /eis.*esse|esse.*eis/i && Time.now - last > 10
     user = status.user.screen_name
     client.statuses.update! :status => "@#{status.user.screen_name} #{reply} #eisessen"
     puts
     puts status.text
     puts "--"
     puts "@#{status.user.screen_name} #{reply}"
+    last = Time.now
   end
 end
